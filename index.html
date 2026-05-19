@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thesist — From publication to product.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1B2A4A;
+    --teal: #3ECFB2;
+    --teal-light: rgba(62,207,178,0.12);
+    --teal-mid: rgba(62,207,178,0.25);
+    --navy-light: #253559;
+    --navy-dark: #131f38;
+    --white: #ffffff;
+    --off-white: #F7F9FC;
+    --gray: #6B7A99;
+    --gray-light: #E8EDF5;
+    --text: #1B2A4A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    line-height: 1.2;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 40px;
+    background: rgba(27,42,74,0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(62,207,178,0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+
+  .nav-logo span { color: var(--teal); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--teal); }
+
+  .nav-cta {
+    background: var(--teal) !important;
+    color: var(--navy) !important;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-weight: 600 !important;
+    transition: opacity 0.2s !important;
+  }
+
+  .nav-cta:hover { opacity: 0.85; }
+
+  .nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    padding: 4px;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 40px 80px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(62,207,178,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -150px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(62,207,178,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    background: var(--teal-light);
+    color: var(--teal);
+    border: 1px solid rgba(62,207,178,0.3);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+    color: var(--white);
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--teal);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 40px;
+    line-height: 1.75;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--teal);
+    color: var(--navy);
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(62,207,178,0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(62,207,178,0.4);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.25);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--teal);
+    background: rgba(62,207,178,0.08);
+  }
+
+  .hero-visual {
+    position: relative;
+  }
+
+  .hero-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(62,207,178,0.2);
+    border-radius: 16px;
+    padding: 32px;
+    backdrop-filter: blur(10px);
+  }
+
+  .hero-card-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 20px;
+  }
+
+  .hero-card-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .hero-card-row:last-child { border-bottom: none; }
+
+  .hero-card-icon {
+    width: 38px;
+    height: 38px;
+    background: var(--teal-light);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .hero-card-text { flex: 1; }
+
+  .hero-card-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+
+  .hero-card-desc {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .hero-card-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 100px;
+    background: rgba(62,207,178,0.2);
+    color: var(--teal);
+    white-space: nowrap;
+  }
+
+  .hero-card-badge.orange {
+    background: rgba(255,167,38,0.2);
+    color: #FFA726;
+  }
+
+  .hero-card-badge.blue {
+    background: rgba(100,149,237,0.2);
+    color: #6495ED;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 96px 40px; }
+
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    color: var(--navy);
+    margin-bottom: 18px;
+  }
+
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--gray);
+    max-width: 600px;
+    line-height: 1.75;
+  }
+
+  /* ── PROBLEM STRIP ── */
+  .problem-strip {
+    background: var(--off-white);
+    padding: 72px 40px;
+    border-top: 1px solid var(--gray-light);
+    border-bottom: 1px solid var(--gray-light);
+  }
+
+  .problem-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .problem-left h2 {
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    color: var(--navy);
+    margin-bottom: 20px;
+  }
+
+  .problem-left p {
+    color: var(--gray);
+    line-height: 1.8;
+    font-size: 1rem;
+  }
+
+  .problem-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .problem-stat-item {
+    background: var(--white);
+    border: 1px solid var(--gray-light);
+    border-left: 4px solid var(--teal);
+    border-radius: 10px;
+    padding: 20px 24px;
+  }
+
+  .problem-stat-item p {
+    font-size: 0.95rem;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  .problem-stat-item strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  /* ── METHODOLOGY ── */
+  .methodology { background: var(--white); }
+
+  .method-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .method-header .section-subtitle {
+    margin: 0 auto;
+  }
+
+  .method-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .method-steps::before {
+    content: '';
+    position: absolute;
+    left: 39px;
+    top: 40px;
+    bottom: 40px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--teal), rgba(62,207,178,0.1));
+  }
+
+  .method-step {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    padding: 32px 0;
+    position: relative;
+  }
+
+  .method-step:not(:last-child) {
+    border-bottom: 1px solid var(--gray-light);
+  }
+
+  .method-step-num {
+    width: 80px;
+    height: 80px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    border: 3px solid var(--teal);
+    position: relative;
+    z-index: 1;
+  }
+
+  .method-step-content { flex: 1; padding-top: 16px; }
+
+  .method-step-phase {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+
+  .method-step-content h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .method-step-content p {
+    font-size: 0.95rem;
+    color: var(--gray);
+    line-height: 1.75;
+    max-width: 640px;
+  }
+
+  .method-step-meta {
+    display: flex;
+    gap: 12px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+
+  .method-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 100px;
+    background: var(--teal-light);
+    color: var(--navy);
+    border: 1px solid rgba(62,207,178,0.25);
+  }
+
+  /* ── FEATURES ── */
+  .features { background: var(--off-white); }
+
+  .features-header {
+    margin-bottom: 56px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .feature-card {
+    background: var(--white);
+    border: 1px solid var(--gray-light);
+    border-radius: 14px;
+    padding: 32px;
+    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+  }
+
+  .feature-card:hover {
+    box-shadow: 0 8px 32px rgba(27,42,74,0.08);
+    transform: translateY(-3px);
+    border-color: rgba(62,207,178,0.3);
+  }
+
+  .feature-icon {
+    width: 52px;
+    height: 52px;
+    background: var(--teal-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+
+  .feature-card h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .feature-card p {
+    font-size: 0.9rem;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  /* ── WHO WE SERVE ── */
+  .audience { background: var(--navy); padding: 96px 40px; }
+
+  .audience .section-title { color: var(--white); }
+  .audience .section-subtitle { color: rgba(255,255,255,0.6); }
+  .audience .section-eyebrow { color: var(--teal); }
+
+  .audience-header { margin-bottom: 56px; }
+
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .audience-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 32px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .audience-card:hover {
+    border-color: rgba(62,207,178,0.35);
+    background: rgba(62,207,178,0.06);
+  }
+
+  .audience-card-icon {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+
+  .audience-card h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .audience-card p {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+  }
+
+  /* ── FOUNDER ── */
+  .founder { background: var(--white); }
+
+  .founder-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--navy);
+    border-radius: 20px;
+    padding: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .founder-inner::before {
+    content: '"';
+    position: absolute;
+    top: -20px; right: 40px;
+    font-family: 'Playfair Display', serif;
+    font-size: 18rem;
+    color: rgba(62,207,178,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .founder-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 20px;
+  }
+
+  .founder-note {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.85;
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .founder-sig {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .founder-avatar {
+    width: 52px;
+    height: 52px;
+    background: var(--teal-light);
+    border-radius: 50%;
+    border: 2px solid var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+
+  .founder-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .founder-role {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 2px;
+  }
+
+  /* ── FAQ ── */
+  .faq { background: var(--off-white); }
+
+  .faq-header { margin-bottom: 48px; }
+
+  .faq-list {
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .faq-item {
+    background: var(--white);
+    border: 1px solid var(--gray-light);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 22px 28px;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.97rem;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    transition: color 0.2s;
+  }
+
+  .faq-question:hover { color: var(--teal); }
+
+  .faq-arrow {
+    width: 24px;
+    height: 24px;
+    background: var(--teal-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--teal);
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+
+  .faq-item.open .faq-arrow {
+    transform: rotate(180deg);
+    background: var(--teal);
+    color: var(--white);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .faq-answer-inner {
+    padding: 0 28px 22px;
+    font-size: 0.92rem;
+    color: var(--gray);
+    line-height: 1.8;
+  }
+
+  /* ── CTA FINAL ── */
+  .cta-final {
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+    padding: 112px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-final::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(62,207,178,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-final-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-final h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--white);
+    margin-bottom: 18px;
+  }
+
+  .cta-final h2 em {
+    font-style: normal;
+    color: var(--teal);
+  }
+
+  .cta-final p {
+    color: rgba(255,255,255,0.65);
+    font-size: 1.05rem;
+    margin-bottom: 48px;
+    line-height: 1.75;
+  }
+
+  .cta-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(62,207,178,0.2);
+    border-radius: 16px;
+    padding: 40px;
+  }
+
+  .cta-box h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .cta-box p {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 24px;
+  }
+
+  .cta-form {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .cta-form input[type="email"] {
+    flex: 1;
+    min-width: 240px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    border: 1px solid rgba(62,207,178,0.3);
+    background: rgba(255,255,255,0.07);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .cta-form input[type="email"]::placeholder { color: rgba(255,255,255,0.35); }
+  .cta-form input[type="email"]:focus { border-color: var(--teal); }
+
+  .cta-form button {
+    background: var(--teal);
+    color: var(--navy);
+    padding: 14px 28px;
+    border-radius: 8px;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    white-space: nowrap;
+  }
+
+  .cta-form button:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .cta-note {
+    margin-top: 16px;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy-dark);
+    padding: 40px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .footer-logo span { color: var(--teal); }
+
+  .footer-copy {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .footer-powered {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .footer-powered a {
+    color: var(--teal);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .footer-powered a:hover { text-decoration: underline; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: var(--navy-dark);
+      padding: 20px 24px;
+      border-top: 1px solid rgba(62,207,178,0.15);
+      gap: 20px;
+    }
+
+    .nav-hamburger { display: flex; }
+
+    .hero { padding: 100px 24px 60px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero-visual { display: none; }
+
+    section { padding: 64px 24px; }
+    .problem-strip { padding: 56px 24px; }
+    .problem-inner { grid-template-columns: 1fr; gap: 40px; }
+
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .audience-grid { grid-template-columns: 1fr; }
+
+    .method-steps::before { display: none; }
+    .method-step { flex-direction: column; gap: 16px; }
+    .method-step-num { width: 56px; height: 56px; font-size: 1.2rem; }
+    .method-step-content { padding-top: 0; }
+
+    .founder-inner { padding: 36px 28px; }
+
+    .cta-final { padding: 72px 24px; }
+    .cta-box { padding: 28px 24px; }
+
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+    footer { padding: 32px 24px; }
+  }
+
+  @media (max-width: 580px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .hero-ctas { flex-direction: column; }
+    .hero-ctas a { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">Thes<span>ist</span></a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#methodology">How It Works</a></li>
+    <li><a href="#features">What You Get</a></li>
+    <li><a href="#who">Who We Serve</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact" class="nav-cta">Book a Discovery Call</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Research Commercialization Studio</div>
+      <h1>From <em>publication</em><br>to product.</h1>
+      <p class="hero-sub">Thesist is an AI-powered studio that turns university research into investor-ready product concepts — scanning publications, identifying hidden commercial potential, building prototypes, and validating market demand.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary">Book a Discovery Call</a>
+        <a href="#methodology" class="btn-secondary">See How It Works</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-label">📡 Live Research Pipeline</div>
+        <div class="hero-card-row">
+          <div class="hero-card-icon">🔬</div>
+          <div class="hero-card-text">
+            <div class="hero-card-title">Nanomaterial Battery Chemistry</div>
+            <div class="hero-card-desc">Materials Science — Technical University</div>
+          </div>
+          <div class="hero-card-badge">High Fit</div>
+        </div>
+        <div class="hero-card-row">
+          <div class="hero-card-icon">🧬</div>
+          <div class="hero-card-text">
+            <div class="hero-card-title">Predictive Biomarker Detection</div>
+            <div class="hero-card-desc">Life Sciences — Medical Faculty</div>
+          </div>
+          <div class="hero-card-badge orange">Validating</div>
+        </div>
+        <div class="hero-card-row">
+          <div class="hero-card-icon">🤖</div>
+          <div class="hero-card-text">
+            <div class="hero-card-title">Federated Learning Framework</div>
+            <div class="hero-card-desc">Computer Science — AI Lab</div>
+          </div>
+          <div class="hero-card-badge blue">Prototyping</div>
+        </div>
+        <div class="hero-card-row">
+          <div class="hero-card-icon">🌱</div>
+          <div class="hero-card-text">
+            <div class="hero-card-title">Soil Carbon Sequestration Model</div>
+            <div class="hero-card-desc">Agri-Tech — Environmental Dept.</div>
+          </div>
+          <div class="hero-card-badge">High Fit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM STRIP -->
+<div class="problem-strip">
+  <div class="problem-inner">
+    <div class="problem-left">
+      <h2>Most university research<br>never leaves the lab.</h2>
+      <p>Universities produce enormous volumes of publishable, fundable, and technically breakthrough research every year. But the path from academic output to commercial product is long, uncertain, and resource-intensive — and most institutions lack the dedicated capacity to walk it.</p>
+      <br>
+      <p>The result: commercially viable discoveries are shelved, IP sits underutilised, and researchers never learn whether their work could have changed an industry.</p>
+      <br>
+      <p style="color: var(--navy); font-weight: 600;">Thesist exists to change that.</p>
+    </div>
+    <div class="problem-stats">
+      <div class="problem-stat-item">
+        <p><strong>Tech transfer offices are stretched thin.</strong> Most manage hundreds of disclosures with small teams, making deep commercial analysis of every output nearly impossible.</p>
+      </div>
+      <div class="problem-stat-item">
+        <p><strong>The gap between "publishable" and "investable" is vast.</strong> Researchers are trained to produce knowledge — not market-ready products. Bridging that gap requires a different skill set entirely.</p>
+      </div>
+      <div class="problem-stat-item">
+        <p><strong>Real market validation is rare.</strong> Most commercialisation efforts stop at desk research. Thesist goes further — testing real demand with real buyers before asking for investment.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- METHODOLOGY -->
+<section class="methodology" id="methodology">
+  <div class="section-inner">
+    <div class="method-header">
+      <div class="section-eyebrow">Our Approach</div>
+      <h2 class="section-title">A studio process built for academic innovation</h2>
+      <p class="section-subtitle">We've designed a structured commercialisation sprint that takes research from raw output to investor-ready concept — in weeks, not years.</p>
+    </div>
+    <div class="method-steps">
+
+      <div class="method-step">
+        <div class="method-step-num">🔍</div>
+        <div class="method-step-content">
+          <div class="method-step-phase">Phase 01 — Discovery</div>
+          <h3>Scan your entire research portfolio</h3>
+          <p>We ingest your university's publications, patent filings, grant outputs, and researcher profiles. Our AI-powered scanner evaluates each output across market fit, timing, IP defensibility, and commercial feasibility — ranking the highest-potential opportunities so you know exactly where to focus first.</p>
+          <div class="method-step-meta">
+            <span class="method-tag">AI-powered scanning</span>
+            <span class="method-tag">Patent analysis</span>
+            <span class="method-tag">Feasibility ranking</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="method-step">
+        <div class="method-step-num">📊</div>
+        <div class="method-step-content">
+          <div class="method-step-phase">Phase 02 — Analysis</div>
+          <h3>Build a Commercial Potential Report</h3>
+          <p>For each prioritised opportunity, we produce a detailed commercial map: which industries it fits, who the likely buyers are, what the addressable market looks like, what competitive alternatives exist, and what the go-to-market path could be. This report becomes the foundation for every decision that follows.</p>
+          <div class="method-step-meta">
+            <span class="method-tag">Industry mapping</span>
+            <span class="method-tag">Market sizing</span>
+            <span class="method-tag">Buyer personas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="method-step">
+        <div class="method-step-num">⚡</div>
+        <div class="method-step-content">
+          <div class="method-step-phase">Phase 03 — Build</div>
+          <h3>Translate research into a tangible prototype</h3>
+          <p>A written report can only take you so far. We build a functional prototype or MVP — a real artefact that stakeholders, potential customers, and investors can interact with. This moves the conversation from "interesting paper" to "real product" in a matter of weeks.</p>
+          <div class="method-step-meta">
+            <span class="method-tag">Rapid prototyping</span>
+            <span class="method-tag">MVP development</span>
+            <span class="method-tag">Weeks, not months</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="method-step">
+        <div class="method-step-num">✅</div>
+        <div class="method-step-content">
+          <div class="method-step-phase">Phase 04 — Validate</div>
+          <h3>Test demand with real buyers</h3>
+          <p>We run structured outreach to potential customers, pilot partners, and industry buyers — measuring genuine willingness to pay, not just sentiment. You get real market signals: letters of intent, pilot expressions, pricing data, and objections. No assumptions. No guesswork.</p>
+          <div class="method-step-meta">
+            <span class="method-tag">Buyer outreach</span>
+            <span class="method-tag">Demand signals</span>
+            <span class="method-tag">Pilot conversations</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="method-step">
+        <div class="method-step-num">🚀</div>
+        <div class="method-step-content">
+          <div class="method-step-phase">Phase 05 — Launch Readiness</div>
+          <h3>Hand off an investor-ready package</h3>
+          <p>At the end of the sprint, you receive everything needed for the next step: a pitch deck, IP strategy recommendations, go-to-market plan, and warm introductions to relevant investors and accelerators. The research isn't just validated — it's ready to raise.</p>
+          <div class="method-step-meta">
+            <span class="method-tag">Pitch deck</span>
+            <span class="method-tag">IP strategy</span>
+            <span class="method-tag">Investor introductions</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-inner">
+    <div class="features-header">
+      <div class="section-eyebrow">What You Get</div>
+      <h2 class="section-title">Six deliverables. One complete pipeline.</h2>
+      <p class="section-subtitle" style="margin-top:4px;">Every engagement includes the full commercialisation toolkit — from first scan to final handoff.</p>
+    </div>
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon">🔬</div>
+        <h3>Research Intelligence Scanner</h3>
+        <p>AI-powered analysis of university publications, patents, and grant outputs to identify research with the highest commercial potential — ranked by market fit, timing, and feasibility.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Commercial Potential Report</h3>
+        <p>For each identified opportunity, a detailed report mapping the research to specific industries, use cases, target customers, and estimated market size.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Rapid Prototype Build</h3>
+        <p>A functional prototype or MVP built in weeks, not months — translating complex research into a tangible product concept that stakeholders and customers can interact with.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">✅</div>
+        <h3>Demand Validation Sprint</h3>
+        <p>Structured outreach to potential buyers, pilot customers, and industry partners to validate willingness to pay — delivering real market signals, not assumptions.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <h3>Spin-Out Readiness Package</h3>
+        <p>Everything needed to take the next step: pitch deck, IP strategy recommendations, go-to-market plan, and warm introductions to relevant investors and accelerators.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎛️</div>
+        <h3>University Dashboard</h3>
+        <p>A live portfolio view for university leadership showing all research under evaluation, commercialisation progress, and impact metrics — proving ROI on innovation investment.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section class="audience" id="who">
+  <div class="section-inner">
+    <div class="audience-header">
+      <div class="section-eyebrow">Who We Serve</div>
+      <h2 class="section-title">Built for the people<br>closest to academic innovation</h2>
+      <p class="section-subtitle" style="margin-top:12px;">We work with universities and research institutions — starting in the Nordics and expanding across Europe.</p>
+    </div>
+    <div class="audience-grid">
+
+      <div class="audience-card">
+        <div class="audience-card-icon">🏛️</div>
+        <h3>Tech Transfer Offices</h3>
+        <p>Stretch your team's capacity with AI-powered scanning and structured commercialisation sprints. Prioritise the opportunities most likely to generate IP revenue, spin-outs, and industry partnerships — without adding headcount.</p>
+      </div>
+
+      <div class="audience-card">
+        <div class="audience-card-icon">🎓</div>
+        <h3>VP of Research & Innovation</h3>
+        <p>Demonstrate the real-world impact of your research investment. The University Dashboard gives you a live view of your commercialisation pipeline, with metrics that speak to boards, funders, and government stakeholders.</p>
+      </div>
+
+      <div class="audience-card">
+        <div class="audience-card-icon">🧪</div>
+        <h3>Academic Researchers</h3>
+        <p>You've done the hard scientific work. We help you find out whether there's a product inside your research — and if so, we build the path to market alongside you, handling the commercial complexity so you can stay focused on science.</p>
+      </div>
+
+      <div class="audience-card">
+        <div class="audience-card-icon">🌍</div>
+        <h3>Innovation-Focused HEIs</h3>
+        <p>For institutions with a strategic mandate to increase commercialisation output, Thesist acts as a dedicated innovation studio — scanning your full research portfolio and running concurrent commercialisation sprints across departments.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER NOTE -->
+<section class="founder">
+  <div class="section-inner">
+    <div class="founder-inner">
+      <div class="founder-eyebrow">A Note from the Founder</div>
+      <p class="founder-note">
+        Universities are generating some of the most commercially significant discoveries happening anywhere in the world — breakthroughs in materials, medicine, AI, climate. But the bridge between a published paper and a funded company is still one of the most broken paths in the innovation economy.<br><br>
+        Thesist exists because we believe that gap is solvable. Not with more committees or longer reports — but with faster, sharper, AI-assisted work that gets research in front of real customers and real investors. We're starting in the Nordics because the research quality is world-class and the commercial infrastructure is ready. But the ambition is European.<br><br>
+        If you're sitting on a portfolio of research and wondering how much of it could be worth more than a citation count, we'd love to talk.
+      </p>
+      <div class="founder-sig">
+        <div class="founder-avatar">👋</div>
+        <div>
+          <div class="founder-name">The Thesist Team</div>
+          <div class="founder-role">Research Commercialisation Studio · Nordic &amp; Europe</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-inner">
+    <div class="faq-header">
+      <div class="section-eyebrow">Common Questions</div>
+      <h2 class="section-title">Things people ask us first</h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How long does a commercialisation sprint take?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">The initial Research Intelligence Scan and Commercial Potential Reports typically take 2–4 weeks depending on portfolio size. The Rapid Prototype Build and Demand Validation Sprint together run 6–10 weeks. The full end-to-end process from first scan to investor-ready package is usually complete within 3–4 months — significantly faster than traditional tech transfer timelines.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Do we need to have specific research in mind, or can you scan everything?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Both. We can start with a specific disclosure or IP filing you believe has potential — or we can scan your entire research output and let the AI surface the highest-priority opportunities you may not have identified yet. Many clients are surprised by what emerges from a full portfolio scan.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What happens to our IP during this process?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">All IP remains fully owned by the university and the relevant researchers throughout our engagement. We work under a confidentiality agreement from day one. Our role is to identify and accelerate the commercial value of your IP — not to acquire it. We'll provide IP strategy recommendations as part of the Spin-Out Readiness Package, but all decisions remain with you.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How is Thesist different from a standard technology transfer consultancy?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Traditional tech transfer consulting tends to focus on reports, licensing agreements, and process management. Thesist goes further: we actually build — prototypes, MVPs, and demand validation experiments. We produce real market signals from real buyers, not just desk research. Think of us less as a consultancy and more as a product studio that happens to specialise in academic research.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          We're a small tech transfer office with limited budget. Can we still work with you?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes. We offer both full-portfolio engagements for larger institutions and focused single-opportunity sprints for smaller offices or individual research groups. The discovery call is a good place to explore what scope makes sense for your situation and budget. We'd rather find the right fit than oversell a programme that doesn't match your needs.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Do you work with researchers directly, or only through institutional channels?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">We work with both. Many engagements start with a VP of Research or a tech transfer office, then bring individual researchers in as collaborators throughout the sprint. We also work directly with researchers who want to explore whether their work has commercial legs — though we always recommend looping in your institution's tech transfer function early to handle IP questions cleanly.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-final" id="contact">
+  <div class="cta-final-inner">
+    <div class="section-eyebrow" style="color:var(--teal);margin-bottom:16px;">Let's talk</div>
+    <h2>Ready to find out what's<br>hiding in your <em>research portfolio</em>?</h2>
+    <p>Book a no-obligation discovery call. We'll review your institution's research profile and give you a clear picture of where the highest commercial potential sits — before you commit to anything.</p>
+
+    <div class="cta-box">
+      <h3>Request a Discovery Session</h3>
+      <p>Enter your email and we'll reach out to schedule a call directly with our team.</p>
+      <form class="cta-form">
+        <input type="email" placeholder="your@university.edu" required>
+        <button type="submit">Book a Call →</button>
+      </form>
+      <div class="cta-note">No spam. No hard sell. Just a real conversation about your research portfolio.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="#" class="footer-logo">Thes<span>ist</span></a>
+    <div class="footer-copy">© <span class="year"></span> Thesist. All rights reserved.</div>
+    <div class="footer-powered">Powered by <a href="https://madmantra.com" target="_blank" rel="noopener">MadMantra</a></div>
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+  // Year
+  document.querySelectorAll('.year').forEach(e => e.textContent = new Date().getFullYear());
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  hamburger.addEventListener('click', function() {
+    navLinks.classList.toggle('open');
+  });
+
+  // Close nav on link click
+  navLinks.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      navLinks.classList.remove('open');
+    });
+  });
+
+  // FAQ accordion
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(function(el) {
+      el.classList.remove('open');
+      el.querySelector('.faq-answer').style.maxHeight = null;
+    });
+
+    // Open clicked if it wasn't open
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  }
+
+  // Nav scroll effect
+  window.addEventListener('scroll', function() {
+    const nav = document.getElementById('main-nav');
+    if (window.scrollY > 40) {
+      nav.style.boxShadow = '0 2px 24px rgba(0,0,0,0.25)';
+    } else {
+      nav.style.boxShadow = 'none';
+    }
+  });
+</script>
+
+<script>
+  document.querySelectorAll('form').forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = form.querySelector('input[type="email"]').value;
+      fetch('https://api.madmantra.app/api/landing/thesist/signup', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: email})
+      }).then(function() {
+        form.innerHTML = '<p style="padding:12px;color:green;font-weight:600">Thanks! We will be in touch.</p>';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
